@@ -1,0 +1,72 @@
+
+// ACCESSO AL SISTEMA
+
+Program start
+Get username
+Get password
+
+if username && password
+    Login() return user
+
+    if(user)
+        RedirectMain() withinput user
+    else
+        showError()
+else
+    showError()
+
+// Crear Doctor
+
+Program start
+Set id autoincrement
+Get name
+Get speciality
+
+if name && speciality
+    Create() return doctor
+else
+    showError()
+
+// Crear Paciente
+
+Program start
+Set id autoincrement
+Get name
+Get gender
+Get age
+
+if name && gender && age
+    Create() return patient
+else
+    showError()
+
+// Crear usuario
+
+Program start
+Set id autoincrement
+Get name
+Get username
+Get password
+
+if name && username && password
+    Create() return user
+else
+    showError()
+
+// Crear cita
+
+Program start
+Set id autoincrement
+Get doctor
+Get patient
+Get description
+Get dateTime
+
+If doctor is null || patient is null
+    showError()
+    return
+
+    if doctor && patient && description && IsValid(dateTime)
+        Create() return appointment
+    else
+        showError()
