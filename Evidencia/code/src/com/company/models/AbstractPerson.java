@@ -1,11 +1,9 @@
 package com.company.models;
 
 public abstract class AbstractPerson {
-    int id;
     String name;
 
-    public AbstractPerson(int id, String name) {
-        this.id = id;
+    public AbstractPerson(String name) {
         this.name = name;
     }
 

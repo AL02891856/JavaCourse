@@ -1,7 +1,8 @@
 package com.company.interfaces;
 
+import java.io.IOException;
+
 public interface IActions {
-    void Create();
-    void Delete();
-    void Update();
+    void create() throws IOException;
+    // void update();
 }

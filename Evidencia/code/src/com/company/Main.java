@@ -1,7 +1,6 @@
 package com.company;
 
-import com.company.models.Auth;
-import com.company.models.User;
+import com.company.models.*;
 import com.company.util.Constants;
 
 import java.io.BufferedWriter;
@@ -18,6 +17,7 @@ public class Main {
             Auth auth;
             String username;
             String password;
+            boolean exit = false;
 
             init();
             do {
@@ -27,6 +27,70 @@ public class Main {
                 password = s.nextLine();
                 auth = new Auth(username, password);
             } while(!auth.userExists());
+
+            while(!exit){
+                System.out.println("Bienvenidos, favor de seleccionar una opcion: \n" +
+                        "1) Crear doctor\n" +
+                        "2) Crear patient\n" +
+                        "3) Crear cita\n" +
+                        "4) Salir");
+                String option = s.nextLine();
+
+                switch (option) {
+                    case "1":
+                        System.out.println("Inserte el nombre del doctor: ");
+                        String keyDoctor = s.nextLine();
+                        System.out.println("Inserte la especialidad: ");
+                        String valueDoctor = s.nextLine();
+                        Doctor doctor = new Doctor(keyDoctor, valueDoctor);
+                        doctor.load();
+                        doctor.create();
+                        break;
+                    case "2":
+                        System.out.println("Inserte el nombre del paciente: ");
+                        String keyPatient = s.nextLine();
+                        System.out.println("Inserte el sexo: ");
+                        String valuePatient = s.nextLine();
+                        Patient patient  = new Patient(keyPatient, valuePatient);
+                        patient.load();
+                        patient.create();
+                        break;
+                    case "3":
+                        Appointment appointment = new Appointment();
+                        System.out.println("Inserte la descripcion de la cita: ");
+                        String desc = s.nextLine();
+                        doctor = new Doctor();
+                        patient = new Patient();
+                        patient.load();
+                        doctor.load();
+                        String doctorName = "";
+                        String patientName = "";
+                        String valueCita = "";
+
+                        do{
+                            System.out.println("Inserte el doctor: ");
+                            doctorName = s.nextLine();
+                        } while (!doctor.getDoctors().containsKey(doctorName));
+
+                        do{
+                            System.out.println("Inserte el paciente: ");
+                            patientName = s.nextLine();
+                        } while (!patient.getPatient().containsKey(doctorName));
+
+                        System.out.println("Inserte el horario: ");
+                        String date = s.nextLine();
+                        appointment  = new Appointment(doctorName, patientName, desc, date);
+                        appointment.load();
+                        appointment.create();
+                        break;
+                    case "4":
+                        exit = true;
+                        break;
+                    default:
+                        System.out.println("Opcion incorrecta, intente de nuevo...");
+                        break;
+                }
+            }
 
         } catch (IOException ex) {
             System.out.println("Error: Hubo un problema al crear la base de datos." +

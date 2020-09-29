@@ -15,7 +15,7 @@ public class User extends AbstractPerson {
 
 
     public User(int id, String name, String username, String password) {
-        super(id, name);
+        super(name);
         this.username = username;
         this.password = password;
     }
